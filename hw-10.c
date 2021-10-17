@@ -28,6 +28,13 @@ char * randomStringGen(char * string, int length){
     return string;
 }
 
+void print_list(struct pokemon * p){
+    if (&p){
+        printPokemon(p);
+        print_list(p->evolvesTo);
+    }
+}
+
 int main(){
     srand(time(NULL));
     int length = rand() % 50 + 2;
