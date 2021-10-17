@@ -41,6 +41,13 @@ struct pokemon * insert_front(struct pokemon * y, char* name, int hp){
     return new;
 }
 
+struct pokemon * free_list(struct pokemon * paulAbandonedMe){
+    if (&(paulAbandonedMe->evolvesTo)){
+        free_list(paulAbandonedMe->evolvesTo);
+    }
+    free(paulAbandonedMe);
+}
+
 int main(){
     srand(time(NULL));
     int length = rand() % 50 + 2;
