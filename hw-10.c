@@ -35,6 +35,12 @@ void print_list(struct pokemon * p){
     }
 }
 
+struct pokemon * insert_front(struct pokemon * y, char* name, int hp){
+    struct pokemon *new = allocPokemon(name, hp);
+    new->evolvesTo = y;
+    return new;
+}
+
 int main(){
     srand(time(NULL));
     int length = rand() % 50 + 2;
