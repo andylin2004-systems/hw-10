@@ -29,8 +29,8 @@ char * randomStringGen(char * string, int length){
 }
 
 void print_list(struct pokemon * p){
+    printPokemon(p);
     if (&p){
-        printPokemon(p);
         print_list(p->evolvesTo);
     }
 }
