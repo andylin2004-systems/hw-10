@@ -54,9 +54,9 @@ struct pokemon * free_list(struct pokemon * paulAbandonedMe){
 struct pokemon * remove_node(struct pokemon *front, char* name){
     struct pokemon *prev = front;
     struct pokemon *current = front;
+    struct pokemon *next = front->evolvesTo;
     while (current)
     {
-        struct pokemon *next = front->evolvesTo;
         if (strcmp(current->name, name) == 0){
             prev->evolvesTo = next;
             if (current == front){
@@ -64,6 +64,10 @@ struct pokemon * remove_node(struct pokemon *front, char* name){
             }
             free(current);
             return front;
+        }else{
+            prev = current;
+            current = current->evolvesTo;
+            next = current->evolvesTo;
         }
     }
     return front;
