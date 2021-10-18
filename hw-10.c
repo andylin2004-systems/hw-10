@@ -30,7 +30,7 @@ char * randomStringGen(char * string, int length){
 
 void print_list(struct pokemon * p){
     printPokemon(p);
-    if (&p){
+    if (p->evolvesTo){
         print_list(p->evolvesTo);
     }
 }
@@ -42,17 +42,16 @@ struct pokemon * insert_front(struct pokemon * y, char* name, int hp){
 }
 
 struct pokemon * free_list(struct pokemon * paulAbandonedMe){
-    if (&(paulAbandonedMe->evolvesTo)){
+    if (paulAbandonedMe->evolvesTo){
         free_list(paulAbandonedMe->evolvesTo);
     }
     free(paulAbandonedMe);
+    return paulAbandonedMe;
 }
 
 int main(){
-    srand(time(NULL));
-    int length = rand() % 50 + 2;
-    char name[length];
-    struct pokemon *p = allocPokemon(randomStringGen(name, length), rand());
-    printPokemon(p);
-    return 0;
+    struct pokemon *pikachu = allocPokemon("Pikachu", 40);
+    pikachu->evolvesTo = allocPokemon("Raichu", 80);
+    struct pokemon *pichu = insert_front(pikachu, "Pichu", 20);
+    print_list(pichu);
 }
