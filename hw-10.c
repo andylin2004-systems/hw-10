@@ -42,10 +42,11 @@ struct pokemon * insert_front(struct pokemon * y, char* name, int hp){
 }
 
 struct pokemon * free_list(struct pokemon * paulAbandonedMe){
-    if (paulAbandonedMe->evolvesTo){
-        free_list(paulAbandonedMe->evolvesTo);
+    while (paulAbandonedMe){
+        struct pokemon *next = paulAbandonedMe->evolvesTo;
+        free(paulAbandonedMe);
+        paulAbandonedMe = next;
     }
-    free(paulAbandonedMe);
     return paulAbandonedMe;
 }
 
@@ -54,4 +55,6 @@ int main(){
     pikachu->evolvesTo = allocPokemon("Raichu", 80);
     struct pokemon *pichu = insert_front(pikachu, "Pichu", 20);
     print_list(pichu);
+    free_list(pichu);
+    printPokemon(pichu);
 }
