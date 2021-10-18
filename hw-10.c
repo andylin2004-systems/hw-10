@@ -57,14 +57,18 @@ struct pokemon * remove_node(struct pokemon *front, char* name){
     struct pokemon *next = front->evolvesTo;
     while (current)
     {
-        if (strcmp(current->name, name) == 0){
+        printf("check %s", current->name);
+        if (strcmp(current->name, name) == 0)
+        {
             prev->evolvesTo = next;
             if (current == front){
                 front = current->evolvesTo;
             }
             free(current);
             return front;
-        }else{
+        }
+        else
+        {
             prev = current;
             current = current->evolvesTo;
             next = current->evolvesTo;
@@ -79,5 +83,9 @@ int main(){
     struct pokemon *pichu = insert_front(pikachu, "Pichu", 20);
     print_list(pichu);
     free_list(pichu);
-    printf("%d", &pichu);
+    pikachu = allocPokemon("Pikachu", 40);
+    pikachu->evolvesTo = allocPokemon("Raichu", 80);
+    pichu = insert_front(pikachu, "Pichu", 20);
+    remove_node(pichu, "Raichu");
+    print_list(pichu);
 }
