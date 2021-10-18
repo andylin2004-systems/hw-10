@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 
 struct pokemon {
     char *name;
@@ -50,11 +51,29 @@ struct pokemon * free_list(struct pokemon * paulAbandonedMe){
     return paulAbandonedMe;
 }
 
+struct pokemon * remove_node(struct pokemon *front, char* name){
+    struct pokemon *prev = front;
+    struct pokemon *current = front;
+    while (current)
+    {
+        struct pokemon *next = front->evolvesTo;
+        if (strcmp(current->name, name) == 0){
+            prev->evolvesTo = next;
+            if (current == front){
+                front = current->evolvesTo;
+            }
+            free(current);
+            return front;
+        }
+    }
+    return front;
+}
+
 int main(){
     struct pokemon *pikachu = allocPokemon("Pikachu", 40);
     pikachu->evolvesTo = allocPokemon("Raichu", 80);
     struct pokemon *pichu = insert_front(pikachu, "Pichu", 20);
     print_list(pichu);
     free_list(pichu);
-    printPokemon(pichu);
+    printf("%d", &pichu);
 }
