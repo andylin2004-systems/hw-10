@@ -76,16 +76,3 @@ struct pokemon * remove_node(struct pokemon *front, char* name){
     }
     return front;
 }
-
-int main(){
-    struct pokemon *pikachu = allocPokemon("Pikachu", 40);
-    pikachu->evolvesTo = allocPokemon("Raichu", 80);
-    struct pokemon *pichu = insert_front(pikachu, "Pichu", 20);
-    print_list(pichu);
-    free_list(pichu);
-    pikachu = allocPokemon("Pikachu", 40);
-    pikachu->evolvesTo = allocPokemon("Raichu", 80);
-    pichu = insert_front(pikachu, "Pichu", 20);
-    remove_node(pichu, "Raichu");
-    print_list(pichu);
-}
